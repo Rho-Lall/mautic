@@ -161,38 +161,12 @@
   - 4.5c. Add output documentation for module integration
   - _Requirements: 2.1, 3.3_
 
-- [ ] 5. Set up private repository for production deployment (**Production Config - Components I, J, K**)
-- [ ] 5.1 Create private repository structure
-  - **Building:** Private repo from Repository Structure diagram (Production Config)
-  - **Files:** New private repository with encrypted secrets
-  - 5.1a. Set up GitHub repository with appropriate access controls
-  - 5.1b. Create environment-specific Terraform configurations referencing public modules (H)
-  - 5.1c. Add encrypted secrets management for production variables
+- [x] 5. Set up private repository for production deployment (**Production Config - Components I, J, K**)
+  - **Status:** Moved to private repository spec
+  - **Location:** Private repo `.kiro/specs/production-deployment/`
+  - **Reason:** Deployment configuration is environment-specific and belongs in private repository
+  - This task has been relocated to maintain clean separation between reusable public modules and deployment-specific private configuration
   - _Requirements: 3.2, 3.4, 3.5_
-
-- [ ] 5.2 Configure development environment deployment
-  - **Building:** Development deployment using Terraform Modules (H) + Production Config
-  - **Files:** Private repo `terraform/environments/dev/`
-  - 5.2a. Create Terraform configuration referencing public repo Terraform Modules (H)
-  - 5.2b. Set up development-specific variables and domain configuration
-  - 5.2c. Add GitHub Actions workflow for automated development deployment
-  - _Requirements: 2.2, 3.4_
-
-- [ ] 5.3 Configure production environment deployment
-  - **Building:** Production deployment using Terraform Modules (H) + Production Config
-  - **Files:** Private repo `terraform/environments/prod/`
-  - 5.3a. Create production Terraform configuration with security hardening
-  - 5.3b. Set up encrypted production variables and AWS credentials
-  - 5.3c. Add production deployment workflow with approval gates
-  - _Requirements: 2.2, 3.5_
-
-- [ ] 5.4 Implement deployment automation and monitoring
-  - **Building:** CI/CD pipeline for the complete Runtime Flow architecture
-  - **Files:** Private repo `.github/workflows/`, monitoring configs
-  - 5.4a. Create deployment scripts with rollback capabilities
-  - 5.4b. Add health checks and monitoring alerts for API Gateway → Lambda → DynamoDB flow
-  - 5.4c. Set up automated testing in deployment pipeline
-  - _Requirements: 2.4_
 
 - [ ] 6. Prepare for future Mautic integration
 - [ ] 6.1 Add webhook endpoint infrastructure
