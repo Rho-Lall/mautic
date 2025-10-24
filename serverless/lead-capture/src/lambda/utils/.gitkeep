@@ -1,0 +1,4 @@
+# Shared Lambda utilities will be created here
+# - validation.js (input validation)
+# - database.js (DynamoDB operations)
+# - auth.js (authentication helpers)

@@ -1,0 +1,4 @@
+# API Gateway Terraform module will be created here
+# - main.tf (API Gateway resources)
+# - variables.tf (input variables)
+# - outputs.tf (output values)

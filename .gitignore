@@ -1,0 +1,47 @@
+# Terraform backend configuration files (contain sensitive info)
+*.hcl
+backend.hcl
+
+# Terraform state files
+*.tfstate
+*.tfstate.*
+
+# Terraform variable files that may contain sensitive data
+*.tfvars
+*.tfvars.json
+
+# Terraform CLI configuration files
+.terraformrc
+terraform.rc
+
+# Terraform directories
+.terraform/
+.terraform.lock.hcl
+
+# AWS credentials and config
+.aws/
+aws-credentials.csv
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment variables
+.env
+.env.local
+.env.*.local

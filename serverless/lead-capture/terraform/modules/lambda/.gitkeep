@@ -1,0 +1,4 @@
+# Lambda Terraform module will be created here
+# - main.tf (Lambda resources)
+# - variables.tf (input variables)
+# - outputs.tf (output values)

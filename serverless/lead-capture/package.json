@@ -1,0 +1,59 @@
+{
+  "name": "serverless-lead-capture",
+  "version": "1.0.0",
+  "description": "A serverless lead capture form system that can be embedded into GitHub Pages websites and deployed on AWS infrastructure",
+  "main": "src/lambda/handlers/submit-lead.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix",
+    "build": "npm run build:lambda && npm run build:client",
+    "build:lambda": "zip -r lambda-deployment.zip src/lambda/",
+    "build:client": "mkdir -p dist && cp src/client/* dist/",
+    "dev": "npm run build:client && python -m http.server 8000 --directory dist",
+    "deploy:dev": "cd terraform/environments/dev && terraform apply",
+    "deploy:plan": "cd terraform/environments/dev && terraform plan"
+  },
+  "keywords": [
+    "serverless",
+    "lead-capture",
+    "aws",
+    "lambda",
+    "api-gateway",
+    "dynamodb",
+    "terraform",
+    "mautic",
+    "forms",
+    "github-pages"
+  ],
+  "author": "Rho Lall:Kiro",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.130",
+    "@types/node": "^20.10.0",
+    "eslint": "^8.55.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-n": "^16.4.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "jest": "^29.7.0",
+    "prettier": "^3.1.0"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1500.0",
+    "uuid": "^9.0.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Rho-Lall/mautic.git",
+    "directory": "serverless/lead-capture"
+  },
+  "bugs": {
+    "url": "https://github.com/Rho-Lall/mautic/issues"
+  },
+  "homepage": "https://github.com/Rho-Lall/mautic#serverless-lead-capture"
+}

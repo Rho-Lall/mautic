@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lead Capture Form - Integration Example</title>
+    <style>
+        /* Host website styles - to demonstrate form adaptation */
+        body {
+            font-family: Georgia, serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: #f8f9fa;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .main-content {
+            font-size: 18px;
+        }
+        
+        .sidebar {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .demo-section {
+            margin: 40px 0;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+        
+        .demo-title {
+            color: #007bff;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+        
+        .config-example {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+    
+    <!-- Include the lead capture form styles -->
+    <link rel="stylesheet" href="lead-capture.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Serverless Lead Capture Form</h1>
+        
+        <div class="content">
+            <div class="main-content">
+                <h2>Integration Example</h2>
+                <p>This page demonstrates how the lead capture form integrates seamlessly into any website. The form adapts to your site's design while maintaining its functionality and accessibility.</p>
+                
+                <h3>Key Features</h3>
+                <ul>
+                    <li><strong>Real-time Validation:</strong> Email addresses and other fields are validated as users type</li>
+                    <li><strong>Responsive Design:</strong> Works perfectly on desktop, tablet, and mobile devices</li>
+                    <li><strong>Theme Support:</strong> Light and dark themes that adapt to your site</li>
+                    <li><strong>Accessibility:</strong> Full keyboard navigation and screen reader support</li>
+                    <li><strong>No Dependencies:</strong> Pure vanilla JavaScript with no external libraries</li>
+                </ul>
+                
+                <h3>How It Works</h3>
+                <p>Simply add a div with the appropriate data attributes and include our JavaScript file. The form will automatically initialize and handle all validation, submission, and user feedback.</p>
+            </div>
+            
+            <div class="sidebar">
+                <h3>Quick Integration</h3>
+                <p>Add this to your HTML:</p>
+                <div class="config-example">
+&lt;div id="lead-capture-form" 
+     data-api-endpoint="https://your-api.com/leads"
+     data-fields="name,email,company"&gt;
+&lt;/div&gt;
+&lt;script src="lead-capture.js"&gt;&lt;/script&gt;
+                </div>
+            </div>
+        </div>
+        
+        <!-- Demo Section 1: Basic Form -->
+        <div class="demo-section">
+            <h2 class="demo-title">Demo 1: Basic Contact Form</h2>
+            <p>A simple contact form with name, email, and message fields. Try entering invalid email addresses to see real-time validation in action.</p>
+            
+            <!-- Lead Capture Form - Basic -->
+            <div id="lead-capture-form-basic" 
+                 data-api-endpoint="https://httpbin.org/post"
+                 data-fields="name,email,details"
+                 data-title="Get in Touch"
+                 data-submit-text="Send Message"
+                 data-theme="light">
+            </div>
+        </div>
+        
+        <!-- Demo Section 2: Business Form -->
+        <div class="demo-section">
+            <h2 class="demo-title">Demo 2: Business Lead Form</h2>
+            <p>A more comprehensive form for business leads including company and phone fields. Notice how the form validates phone numbers and provides helpful feedback.</p>
+            
+            <!-- Lead Capture Form - Business -->
+            <div id="lead-capture-form-business" 
+                 data-api-endpoint="https://httpbin.org/post"
+                 data-fields="name,email,company,phone"
+                 data-title="Request a Demo"
+                 data-submit-text="Get Started"
+                 data-success-message="Thanks! Our team will contact you within 24 hours."
+                 data-theme="light"
+                 data-width="compact">
+            </div>
+        </div>
+        
+        <!-- Demo Section 3: Dark Theme -->
+        <div class="demo-section" style="background: #2c3e50; color: #ecf0f1;">
+            <h2 class="demo-title" style="color: #3498db;">Demo 3: Dark Theme</h2>
+            <p>The same form with a dark theme that's perfect for dark websites or sections. All validation and functionality remains the same.</p>
+            
+            <!-- Lead Capture Form - Dark Theme -->
+            <div id="lead-capture-form-dark" 
+                 data-api-endpoint="https://httpbin.org/post"
+                 data-fields="name,email,company,details"
+                 data-title="Join Our Newsletter"
+                 data-submit-text="Subscribe"
+                 data-theme="dark">
+            </div>
+        </div>
+        
+        <!-- Configuration Examples -->
+        <div class="demo-section">
+            <h2 class="demo-title">Configuration Options</h2>
+            <p>The form supports various configuration options through data attributes:</p>
+            
+            <h3>Available Fields</h3>
+            <ul>
+                <li><code>name</code> - Full name (required by default)</li>
+                <li><code>email</code> - Email address (always required)</li>
+                <li><code>company</code> - Company name (optional)</li>
+                <li><code>phone</code> - Phone number (optional)</li>
+                <li><code>details</code> - Additional details text (optional)</li>
+            </ul>
+            
+            <h3>Configuration Attributes</h3>
+            <ul>
+                <li><code>data-api-endpoint</code> - Your API endpoint URL (required)</li>
+                <li><code>data-fields</code> - Comma-separated list of fields to include</li>
+                <li><code>data-title</code> - Form title text</li>
+                <li><code>data-submit-text</code> - Submit button text</li>
+                <li><code>data-success-message</code> - Success message text</li>
+                <li><code>data-error-message</code> - Error message text</li>
+                <li><code>data-theme</code> - "light" or "dark"</li>
+                <li><code>data-width</code> - "full" or "compact"</li>
+            </ul>
+            
+            <h3>Example Configuration</h3>
+            <div class="config-example">
+&lt;div id="lead-capture-form" 
+     data-api-endpoint="https://api.yourdomain.com/leads"
+     data-fields="name,email,company,phone,details"
+     data-title="Contact Our Sales Team"
+     data-submit-text="Request Quote"
+     data-success-message="Thank you! We'll send you a quote within 2 hours."
+     data-theme="light"
+     data-width="full"&gt;
+&lt;/div&gt;
+            </div>
+        </div>
+        
+        <!-- Validation Examples -->
+        <div class="demo-section">
+            <h2 class="demo-title">Real-time Validation Examples</h2>
+            <p>Try these examples to see the validation in action:</p>
+            
+            <h3>Email Validation</h3>
+            <ul>
+                <li>Try: <code>invalid-email</code> (missing @ and domain)</li>
+                <li>Try: <code>test@</code> (missing domain)</li>
+                <li>Try: <code>@domain.com</code> (missing username)</li>
+                <li>Valid: <code>user@example.com</code></li>
+            </ul>
+            
+            <h3>Name Validation</h3>
+            <ul>
+                <li>Try: <code>A</code> (too short, minimum 2 characters)</li>
+                <li>Try: <code>John123</code> (numbers not allowed)</li>
+                <li>Valid: <code>John Doe</code>, <code>Mary O'Connor</code>, <code>Jean-Pierre</code></li>
+            </ul>
+            
+            <h3>Phone Validation</h3>
+            <ul>
+                <li>Try: <code>abc123</code> (letters not allowed)</li>
+                <li>Valid: <code>+1234567890</code>, <code>555-123-4567</code>, <code>(555) 123-4567</code></li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Include the lead capture form JavaScript -->
+    <script src="lead-capture.js"></script>
+    
+    <!-- Demo-specific JavaScript -->
+    <script>
+        // Add some demo-specific functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Lead Capture Form Demo Page Loaded');
+            console.log('Forms initialized:', document.querySelectorAll('.lead-capture-wrapper').length);
+            
+            // Add click tracking for demo purposes
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('submit-btn')) {
+                    console.log('Form submission attempted on:', e.target.closest('.lead-capture-wrapper'));
+                }
+            });
+        });
+    </script>
+</body>
+</html>

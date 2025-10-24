@@ -1,0 +1,4 @@
+# SES Terraform module will be created here
+# - main.tf (SES resources)
+# - variables.tf (input variables)
+# - outputs.tf (output values)

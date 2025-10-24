@@ -1,0 +1,4 @@
+# Lambda function tests will be created here
+# - submit-lead.test.js
+# - get-leads.test.js
+# - validation.test.js

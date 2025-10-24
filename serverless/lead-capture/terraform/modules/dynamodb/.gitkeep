@@ -1,0 +1,4 @@
+# DynamoDB Terraform module will be created here
+# - main.tf (DynamoDB resources)
+# - variables.tf (input variables)
+# - outputs.tf (output values)
