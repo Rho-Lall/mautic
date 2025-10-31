@@ -24,6 +24,17 @@ resource "aws_api_gateway_deployment" "lead_capture_deployment" {
   rest_api_id = aws_api_gateway_rest_api.lead_capture_api.id
   stage_name  = var.stage_name
 
+  # Force new deployment when methods change
+  triggers = {
+    redeployment = sha1(jsonencode([
+      aws_api_gateway_method.leads_post.id,
+      aws_api_gateway_method.leads_post.api_key_required,
+      aws_api_gateway_method.leads_get.id,
+      aws_api_gateway_method.leads_get.api_key_required,
+      aws_api_gateway_method.leads_options.id,
+    ]))
+  }
+
   lifecycle {
     create_before_destroy = true
   }
@@ -45,13 +56,13 @@ resource "aws_api_gateway_resource" "leads" {
   path_part   = "leads"
 }
 
-# POST Method for lead submission
+# POST Method for lead submission (public - no API key required)
 resource "aws_api_gateway_method" "leads_post" {
   rest_api_id   = aws_api_gateway_rest_api.lead_capture_api.id
   resource_id   = aws_api_gateway_resource.leads.id
   http_method   = "POST"
-  authorization = var.enable_api_key ? "NONE" : "NONE"
-  api_key_required = var.enable_api_key
+  authorization = "NONE"
+  api_key_required = false
 
   request_validator_id = aws_api_gateway_request_validator.lead_capture_validator.id
 }
@@ -61,7 +72,8 @@ resource "aws_api_gateway_method" "leads_get" {
   rest_api_id   = aws_api_gateway_rest_api.lead_capture_api.id
   resource_id   = aws_api_gateway_resource.leads.id
   http_method   = "GET"
-  authorization = "AWS_IAM"
+  authorization = var.enable_api_key ? "NONE" : "NONE"
+  api_key_required = var.enable_api_key
 }
 
 # OPTIONS Method for CORS preflight
@@ -123,10 +135,10 @@ resource "aws_api_gateway_method_response" "leads_options_response" {
   http_method = aws_api_gateway_method.leads_options.http_method
   status_code = "200"
 
-  response_headers = {
-    "Access-Control-Allow-Headers" = true
-    "Access-Control-Allow-Methods" = true
-    "Access-Control-Allow-Origin"  = true
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Headers" = true
+    "method.response.header.Access-Control-Allow-Methods" = true
+    "method.response.header.Access-Control-Allow-Origin"  = true
   }
 }
 
@@ -137,10 +149,14 @@ resource "aws_api_gateway_integration_response" "leads_options_integration_respo
   http_method = aws_api_gateway_method.leads_options.http_method
   status_code = aws_api_gateway_method_response.leads_options_response.status_code
 
-  response_headers = {
-    "Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
-    "Access-Control-Allow-Methods" = "'GET,POST,OPTIONS'"
-    "Access-Control-Allow-Origin"  = var.cors_allow_origin
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+    "method.response.header.Access-Control-Allow-Methods" = "'GET,POST,OPTIONS'"
+    "method.response.header.Access-Control-Allow-Origin"  = var.cors_allow_origin
+  }
+
+  response_templates = {
+    "application/json" = ""
   }
 }
 
@@ -151,8 +167,8 @@ resource "aws_api_gateway_method_response" "leads_post_response" {
   http_method = aws_api_gateway_method.leads_post.http_method
   status_code = "200"
 
-  response_headers = {
-    "Access-Control-Allow-Origin" = true
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin" = true
   }
 }
 
@@ -163,12 +179,12 @@ resource "aws_api_gateway_method_response" "leads_get_response" {
   http_method = aws_api_gateway_method.leads_get.http_method
   status_code = "200"
 
-  response_headers = {
-    "Access-Control-Allow-Origin" = true
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin" = true
   }
 }
-# Custom D
-omain (optional)
+
+# Custom Domain (optional)
 resource "aws_api_gateway_domain_name" "lead_capture_domain" {
   count           = var.custom_domain_name != "" ? 1 : 0
   domain_name     = var.custom_domain_name

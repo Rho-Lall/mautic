@@ -82,8 +82,7 @@ resource "aws_dynamodb_table" "leads_table" {
 
   # Encryption at rest
   server_side_encryption {
-    enabled     = var.enable_encryption
-    kms_key_id  = var.enable_encryption ? aws_kms_key.dynamodb_key[0].arn : null
+    enabled = var.enable_encryption
   }
 
   # Point-in-time recovery
@@ -104,15 +103,8 @@ resource "aws_dynamodb_table" "leads_table" {
   }
 }
 
-# DynamoDB Table Backup
-resource "aws_dynamodb_backup" "leads_table_backup" {
-  count = var.enable_backup ? 1 : 0
-
-  name     = "${var.table_name}-backup-${formatdate("YYYY-MM-DD-hhmm", timestamp())}"
-  table_name = aws_dynamodb_table.leads_table.name
-
-  tags = var.tags
-}
+# Note: DynamoDB backups are managed through point-in-time recovery
+# Manual backups can be created using AWS CLI or console if needed
 
 # Auto Scaling for Read Capacity (if using provisioned billing)
 resource "aws_appautoscaling_target" "read_target" {

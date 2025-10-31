@@ -49,5 +49,21 @@ output "leads_resource_id" {
   value       = aws_api_gateway_resource.leads.id
 }
 
+# Custom Domain Outputs
+output "custom_domain_name" {
+  description = "Custom domain name (if configured)"
+  value       = var.custom_domain_name != "" ? aws_api_gateway_domain_name.lead_capture_domain[0].domain_name : ""
+}
+
+output "custom_domain_regional_domain_name" {
+  description = "Regional domain name for custom domain (if configured)"
+  value       = var.custom_domain_name != "" ? aws_api_gateway_domain_name.lead_capture_domain[0].regional_domain_name : ""
+}
+
+output "custom_domain_regional_zone_id" {
+  description = "Regional zone ID for custom domain (if configured)"
+  value       = var.custom_domain_name != "" ? aws_api_gateway_domain_name.lead_capture_domain[0].regional_zone_id : ""
+}
+
 # Data source for current AWS region
 data "aws_region" "current" {}
