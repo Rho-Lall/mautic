@@ -1,0 +1,32 @@
+Mautic Public Modules - Security Scan Report
+============================================
+Generated: Wed Dec 10 23:46:31 MST 2025
+Scan Location: /Users/rholall/Documents/CODE/mautic-ops/mautic-ops/public-modules/mautic-server
+
+SUMMARY
+-------
+Security Errors: 1
+Security Warnings: 29
+
+SCAN RESULTS
+-----------
+✓ Hardcoded Secrets Scan
+✓ Placeholder Usage Validation  
+✓ Resource Creation Prevention Check
+✓ Terraform Module Security Validation
+✓ Docker Configuration Security Check
+✓ Development Environment Safeguards Check
+
+RECOMMENDATIONS
+--------------
+❌ CRITICAL: 1 security errors must be fixed before release
+⚠️  WARNING: 29 security warnings should be reviewed
+
+NEXT STEPS
+----------
+1. Review and fix any security errors
+2. Address security warnings where applicable
+3. Run security scan again after fixes
+4. Proceed with module testing and validation
+
+For more information, see the security documentation.
