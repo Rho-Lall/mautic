@@ -1,0 +1,83 @@
+# Terraform Configuration Template
+# Copy this file to terraform.tfvars and customize with your values
+# CUSTOMIZE THESE VALUES FOR YOUR ENVIRONMENT (Top 20 lines)
+# =============================================================
+
+# Project & Environment Configuration
+project_name = "mautic-server"                   # CHANGE: Your project name
+environment  = "dev"                             # CHANGE: dev/test/prod
+aws_region   = "us-east-1"                       # CHANGE: Your AWS region
+
+# Domain Configuration (CRITICAL - Must match your setup)
+domain_name        = "yourdomain.com"            # CHANGE: Your registered domain
+route53_zone_id    = "Z1234567890ABC"            # CHANGE: Your Route 53 hosted zone ID
+mautic_subdomain   = "app-dev"                   # CHANGE: Your subdomain prefix (app-dev, app-test, app)
+custom_domain_name = "app-dev.yourdomain.com"    # CHANGE: Full subdomain for this environment
+trusted_hosts      = "app-dev.yourdomain.com"    # CHANGE: Must match custom_domain_name
+
+# Security Configuration (CRITICAL - Restrict access)
+alb_ingress_cidr_blocks = [
+  "YOUR_OFFICE_IP/32",        # CHANGE: Replace with your office public IP
+  "YOUR_HOME_IP/32",          # CHANGE: Replace with your home public IP
+  # "10.0.0.0/8",             # UNCOMMENT: If using internal VPN
+  # "172.16.0.0/12",          # UNCOMMENT: If using private networks
+  # "0.0.0.0/0"               # UNCOMMENT: For production if open to internet
+]
+
+# Team & Cost Configuration
+additional_tags = {
+  Owner       = "dev-team"                       # CHANGE: Your team name
+  Environment = "development"                    # CHANGE: Environment description (development/test/production)
+  Project     = "mautic-server"                  # CHANGE: Project identifier
+  Purpose     = "development-testing"            # CHANGE: Purpose description
+}
+
+# =============================================================
+# ENVIRONMENT-SPECIFIC CONFIGURATION
+# Adjust these values based on your environment needs:
+# - Dev: Smaller, cheaper resources
+# - Test: Medium resources with redundancy
+# - Prod: Large, highly available resources
+# =============================================================
+
+# Network Configuration (adjust CIDR per environment to avoid conflicts)
+vpc_cidr = "10.1.0.0/16"     # Dev: 10.1.0.0/16, Test: 10.2.0.0/16, Prod: 10.3.0.0/16
+public_subnet_count  = 2     # Dev: 2, Test: 2, Prod: 3
+private_subnet_count = 2     # Dev: 2, Test: 2, Prod: 3
+
+# Database Configuration (scale up for higher environments)
+db_instance_class       = "db.t3.micro"    # Dev: t3.micro, Test: t3.small, Prod: t3.medium+
+db_allocated_storage    = 20               # Dev: 20GB, Test: 50GB, Prod: 100GB+
+backup_retention_period = 1                # Dev: 1 day, Test: 7 days, Prod: 30 days
+deletion_protection     = false            # Dev: false, Test: false, Prod: true
+
+# ECS Configuration (scale up for higher environments)
+task_cpu      = 256    # Dev: 256, Test: 512, Prod: 1024+
+task_memory   = 512    # Dev: 512, Test: 1024, Prod: 2048+
+desired_count = 1      # Dev: 1, Test: 2, Prod: 3+
+
+# Monitoring Configuration (enhance for higher environments)
+enable_monitoring_alerts = false    # Dev: false, Test: true, Prod: true
+log_retention_days       = 3        # Dev: 3 days, Test: 14 days, Prod: 90 days
+
+# =============================================================
+# BOILERPLATE CONFIGURATION (Rarely needs changes)
+# =============================================================
+
+# SES Configuration for Email Infrastructure
+ses_configuration_set_name      = "mautic-dev-config-set"    # Update suffix for environment
+ses_reputation_tracking_enabled = true
+ses_delivery_options_tls_policy = "Require"
+ses_sending_enabled             = false    # Dev: false (sandbox), Test/Prod: true
+
+# SSL Configuration (set for test/prod)
+ssl_certificate_arn = null    # Set to your certificate ARN for test/prod
+
+# Custom Domain Configuration
+enable_custom_domain = true
+
+# Environment-specific settings
+enable_fargate_spot       = false    # Use false for stability
+enable_container_insights = true
+enable_nat_gateway        = true
+nat_gateway_count         = 1        # Dev: 1, Test: 2, Prod: 3
