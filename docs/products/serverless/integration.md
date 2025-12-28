@@ -196,10 +196,10 @@ layout: default
 
 # Contact Page
 
-{% include lead-capture-form.html 
+{% raw %}{% include lead-capture-form.html 
    api_endpoint="https://your-api.com/leads"
    fields="name,email,company,details"
-   title="Get in Touch" %}
+   title="Get in Touch" %}{% endraw %}
 ```
 
 ### Gatsby (React)
