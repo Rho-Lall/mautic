@@ -7,6 +7,8 @@ repo_name: GitHub
 
 theme:
   name: material
+  logo: https://rho-lall.github.io/statistics/rho_lall_logo_.png
+  favicon: https://rho-lall.github.io/statistics/rho_lall_logo_.png
   palette:
     - scheme: default
       primary: indigo
