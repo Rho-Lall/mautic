@@ -2,6 +2,31 @@
 
 A comprehensive marketing automation platform with serverless integrations and self-hosted Mautic server capabilities. This repository contains multiple products designed to work together for complete marketing automation workflows.
 
+## 📚 Documentation
+
+**Full documentation is available at: [https://rho-lall.github.io/public-modules/](https://rho-lall.github.io/public-modules/)**
+
+The documentation includes:
+- Getting started guides and installation instructions
+- Product overviews and technical implementation details
+- Architecture diagrams and design decisions
+- Security management and best practices
+
+### Building Documentation Locally
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Serve documentation locally
+mkdocs serve
+
+# Build static site
+mkdocs build
+```
+
+Documentation is automatically deployed to GitHub Pages on every push to main.
+
 ## 🏗️ Products
 
 ### 🚀 Serverless Lead Capture

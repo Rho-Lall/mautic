@@ -1,7 +1,8 @@
 site_name: Mautic Marketing Automation Suite
 site_description: Comprehensive marketing automation platform with serverless integrations and self-hosted Mautic server
-site_author: Your Team
-repo_url: https://github.com/yourusername/mautic-marketing-suite
+site_author: Rho Lall
+site_url: https://rho-lall.github.io/public-modules/
+repo_url: https://github.com/Rho-Lall/public-modules
 repo_name: GitHub
 
 theme:
