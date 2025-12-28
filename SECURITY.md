@@ -36,17 +36,6 @@ This is a **portfolio/demonstration project** that exhibits:
 - **Resource Tagging**: Organized security governance
 - **Terraform IaC**: Reproducible, auditable infrastructure
 
-### 🔍 Security Headers Implementation
-```javascript
-// Security headers configured in API Gateway responses
-{
-  'X-Content-Type-Options': 'nosniff',
-  'X-Frame-Options': 'DENY',
-  'Content-Security-Policy': "default-src 'self'",
-  'Strict-Transport-Security': 'max-age=31536000',
-  'X-XSS-Protection': '1; mode=block'
-}
-```
 
 ## Architecture Security
 
