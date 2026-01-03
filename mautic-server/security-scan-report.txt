@@ -1,6 +1,6 @@
 Mautic Public Modules - Security Scan Report
 ============================================
-Generated: Wed Dec 10 23:46:31 MST 2025
+Generated: Sun Dec 28 08:52:00 MST 2025
 Scan Location: /Users/rholall/Documents/CODE/mautic-ops/mautic-ops/public-modules/mautic-server
 
 SUMMARY
